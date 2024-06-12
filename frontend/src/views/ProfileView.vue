@@ -7,7 +7,7 @@
                 <p><strong>{{ user.name }}</strong></p>
 
                 <div class="mt-6 flex space-x-8 justify-around">
-                    <p class="text-xs text-gray-500">182 friends</p>
+                    <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-xs text-gray-500">182 friends</RouterLink>
                     <p class="text-xs text-gray-500">120 posts</p>
                 </div>
 
@@ -122,7 +122,7 @@ export default {
 
         sendFriendshipRequest() {
             axios
-                .post(`/api/friends/request/${this.$route.params.id}/`)
+                .post(`/api/friends/${this.$route.params.id}/request/`)
                 .then(response => {
                     console.log('data', response.data)
                     if (response.data.message == 'request already sent') {
