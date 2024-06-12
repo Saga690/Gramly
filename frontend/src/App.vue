@@ -6,7 +6,7 @@
           <a href="#" class="text-xl">Gramly</a>
         </div>
 
-        <div class="menu-center flex space-x-12">
+        <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
           <a href="#" class="text-purple-700">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-6 h-6">
@@ -43,9 +43,15 @@
         </div>
 
         <div class="menu-right">
-          <a href="#">
-            <img src="https://i.pravatar.cc/40?img=70" class="rounded-full">
-          </a>
+          <template v-if="userStore.user.isAuthenticated">
+            <a href="#">
+              <img src="https://i.pravatar.cc/40?img=70" class="rounded-full">
+            </a>
+          </template>
+          <template v-else>
+            <RouterLink to="/login" class="mr-4 py-4 px-6 bg-gray-600 text-white rounded-lg">Log in</RouterLink>
+            <RouterLink to="/signup" class="py-4 px-6 bg-purple-600 text-white rounded-lg">Sign up</RouterLink>
+          </template>
         </div>
       </div>
     </div>
