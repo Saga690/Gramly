@@ -1,1 +1,4 @@
 env
+*.pyc
+/backend/backend/__pycache__
+/backend/account/__pycache__
