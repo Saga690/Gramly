@@ -15,9 +15,9 @@
 
         <div class="main-center col-span-2 space-y-4">
             <div class="bg-white border border-gray-200 rounded-lg">
-                <form>
+                <form v-on:submit.prevent="submitForm" method="post">
                     <div class="p-4">  
-                        <textarea class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
+                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
                     </div>
 
                     <div class="p-4 border-t border-gray-100 flex justify-between">
@@ -120,6 +120,24 @@ export default {
                     console.log('error', error)
                 })
         },
+
+        submitForm() {
+            console.log('submitForm', this.body)
+
+            axios
+                .post('/api/posts/create/', {
+                    'body': this.body
+                })
+                .then(response => {
+                    console.log('data', response.data)
+
+                    this.posts.unshift(response.data)
+                    this.body = ''
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        }
 
     }
 }
