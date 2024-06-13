@@ -77,11 +77,11 @@ def handle_request(request, pk, status):
     friendship_request.save()
 
     user.friends.add(request.user)
-    # user.friends_count = user.friends_count + 1
+    user.friends_count = user.friends_count + 1
     user.save()
 
-    # request_user = request.user
-    # request_user.friends_count = request_user.friends_count + 1
-    # request_user.save()
+    request_user = request.user
+    request_user.friends_count = request_user.friends_count + 1
+    request_user.save()
 
     return JsonResponse({'message': 'friendship request updated'})

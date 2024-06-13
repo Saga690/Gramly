@@ -95,7 +95,7 @@ export default {
         const userStore = useUserStore()
 
         return {
-            userStore,
+            userStore
         }
     },
 
@@ -123,7 +123,6 @@ export default {
                 .get(`/api/friends/${this.$route.params.id}/`)
                 .then(response => {
                     console.log('data', response.data)
-
                     this.friendshipRequests = response.data.requests
                     this.friends = response.data.friends
                     this.user = response.data.user
@@ -132,7 +131,6 @@ export default {
                     console.log('error', error)
                 })
         },
-
         handleRequest(status, pk) {
             console.log('handleRequest', status)
             axios
