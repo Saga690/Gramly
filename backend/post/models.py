@@ -18,6 +18,12 @@ class Comment(models.Model):
     created_by = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('created_at',)
+
+    def created_at_formatted(self):
+       return timesince(self.created_at)
+
 
 class PostAttachment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

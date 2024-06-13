@@ -39,7 +39,7 @@
                     </path>
                 </svg>
 
-                <span class="text-gray-500 text-xs">0 comments</span>
+                <RouterLink :to="{name: 'postview', params: {id: post.id}}" class="text-gray-500 text-xs">0 comments</RouterLink>
             </div>
         </div>
 
@@ -56,6 +56,7 @@
 
 <script>
 import axios from 'axios'
+import { RouterLink } from 'vue-router';
 
 export default {
     props: {
