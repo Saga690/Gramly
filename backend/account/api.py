@@ -62,11 +62,17 @@ def friends(request, pk):
 @api_view(['POST'])
 def send_friendship_request(request, pk):
 
-    user = User.objects.get(pk = pk)
+    user = User.objects.get(pk=pk)
 
-    friendship_request = FriendshipRequest.objects.create(created_for = user, created_by = request.user)
+    check1 = FriendshipRequest.objects.filter(created_for=request.user).filter(created_by=user)
+    check2 = FriendshipRequest.objects.filter(created_for=user).filter(created_by=request.user)
 
-    return JsonResponse({'message': 'friendship request created'})
+    if not check1 or not check2:
+        FriendshipRequest.objects.create(created_for=user, created_by=request.user)
+
+        return JsonResponse({'message': 'friendship request created'})
+    else:
+        return JsonResponse({'message': 'request already sent'})
 
 
 @api_view(['POST'])

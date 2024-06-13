@@ -99,7 +99,9 @@ export default {
     data() {
         return {
             posts: [],
-            user: {},
+            user: {
+                id:null
+            },
             body: '',
         }
     },
@@ -125,6 +127,7 @@ export default {
                 .post(`/api/friends/${this.$route.params.id}/request/`)
                 .then(response => {
                     console.log('data', response.data)
+
                     if (response.data.message == 'request already sent') {
                         this.toastStore.showToast(5000, 'The request has already been sent!', 'bg-red-300')
                     } else {
@@ -141,6 +144,7 @@ export default {
                 .get(`/api/posts/profile/${this.$route.params.id}/`)
                 .then(response => {
                     console.log('data', response.data)
+
                     this.posts = response.data.posts
                     this.user = response.data.user
                 })
@@ -151,18 +155,28 @@ export default {
 
         submitForm() {
             console.log('submitForm', this.body)
+
             axios
                 .post('/api/posts/create/', {
                     'body': this.body
                 })
                 .then(response => {
                     console.log('data', response.data)
+
                     this.posts.unshift(response.data)
                     this.body = ''
                 })
                 .catch(error => {
                     console.log('error', error)
                 })
+        },
+
+        logout() {
+            console.log('Log out')
+
+            this.userStore.removeToken()
+
+            this.$router.push('/login')
         }
 
     }
