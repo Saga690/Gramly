@@ -3,34 +3,17 @@
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 rounded-lg">
                 <div class="space-y-4">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between" v-for="conversation in conversations"
+                        v-bind:key="conversation.id">
                         <div class="flex items-center space-x-2">
                             <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
 
-                            <p class="text-xs"><strong>Kylie Jenner</strong></p>
+                            <template v-for="user in conversation.users" v-bind:key="user.id">
+                                <p class="text-xs font-bold" v-if="user.id !== userStore.user.id">{{ user.name }}</p>
+                            </template>
                         </div>
 
-                        <span class="text-xs text-gray-500">18 minutes ago</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-
-                            <p class="text-xs"><strong>Kylie Jenner</strong></p>
-                        </div>
-
-                        <span class="text-xs text-gray-500">18 minutes ago</span>
-                    </div>
-
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
-
-                            <p class="text-xs"><strong>Kylie Jenner</strong></p>
-                        </div>
-
-                        <span class="text-xs text-gray-500">18 minutes ago</span>
+                        <span class="text-xs text-gray-500">{{ conversation.modified_at_formatted }} ago</span>
                     </div>
                 </div>
             </div>
@@ -92,3 +75,54 @@
         </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
+export default {
+    name: 'chat',
+
+    setup() {
+        const userStore = useUserStore()
+        return {
+            userStore
+        }
+    },
+
+    data() {
+        return {
+            conversations: [
+                {
+                    users: []
+                }
+            ]
+        }
+    },
+
+    mounted() {
+        this.getConversations()
+    },
+
+    methods: {
+        getConversations() {
+            console.log('getConv')
+
+            axios
+                .get('/api/chat/')
+                .then(response => {
+                    console.log(response.data)
+                    this.conversations = response.data
+                    // if (this.conversations.length) {
+                    //     this.activeConversation = this.conversations[0].id
+                    // }
+                    // this.getMessages()
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+}
+
+</script>
