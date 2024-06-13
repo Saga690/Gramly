@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 
-from .models import Post, Like, Comment
-from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer
+from .models import Post, Like, Comment, Trend
+from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer, TrendSerializer
 
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
@@ -95,5 +95,12 @@ def post_create_comment(request, pk):
     post.save()
 
     serializer = CommentSerializer(comment)
+
+    return JsonResponse(serializer.data, safe=False)
+
+
+@api_view(['GET'])
+def get_trends(request):
+    serializer = TrendSerializer(Trend.objects.all(), many=True)
 
     return JsonResponse(serializer.data, safe=False)
