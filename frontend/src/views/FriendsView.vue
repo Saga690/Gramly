@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-                <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
+                <img :src="user.get_avatar" class="mb-6 rounded-full">
 
                 <p><strong>{{ user.name }}</strong></p>
 
@@ -19,7 +19,7 @@
 
                 <div class="p-4 text-center bg-gray-100 rounded-lg" v-for="friendshipRequest in friendshipRequests"
                     v-bind:key="friendshipRequest.id">
-                    <img src="https://i.pravatar.cc/100?img=70" class="mb-6 mx-auto rounded-full">
+                    <img :src="friendshipRequest.created_by.get_avatar" class="mb-6 mx-auto rounded-full">
 
                     <p>
                         <strong>
@@ -46,7 +46,7 @@
 
             <div class="p-4 bg-white border border-gray-200 rounded-lg grid grid-cols-2 gap-4" v-if="friends.length">
                 <div class="p-4 text-center bg-gray-100 rounded-lg" v-for="user in friends" v-bind:key="user.id">
-                    <img src="https://i.pravatar.cc/300?img=70" class="mb-6 rounded-full">
+                    <img :src="user.get_avatar" class="mb-6 rounded-full">
 
                     <p>
                         <strong>

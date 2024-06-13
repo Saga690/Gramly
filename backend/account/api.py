@@ -13,6 +13,7 @@ def me(request):
         'id': request.user.id,
         'name': request.user.name,
         'email': request.user.email,
+        'avatar': request.user.get_avatar(),
     })
 
 

@@ -6,9 +6,9 @@
                     <div class="flex items-center justify-between" v-for="conversation in conversations"
                         v-bind:key="conversation.id" v-on:click="setActiveConversation(conversation.id)">
                         <div class="flex items-center space-x-2">
-                            <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
 
                             <template v-for="user in conversation.users" v-bind:key="user.id">
+                                <img :src="user.get_avatar" class="w-[40px] rounded-full">
                                 <p class="text-xs font-bold" v-if="user.id !== userStore.user.id">{{ user.name }}</p>
                             </template>
                         </div>
@@ -35,14 +35,14 @@
                                     ago</span>
                             </div>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
-                                <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
+                                <img :src="message.created_by.get_avatar" class="w-[40px] rounded-full">
                             </div>
                         </div>
 
 
                         <div class="flex w-full mt-2 space-x-3 max-w-md" v-else>
                             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
-                                <img src="https://i.pravatar.cc/300?img=70" class="w-[40px] rounded-full">
+                                <img :src="message.created_by.get_avatar" class="w-[40px] rounded-full">
                             </div>
                             <div>
                                 <div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
