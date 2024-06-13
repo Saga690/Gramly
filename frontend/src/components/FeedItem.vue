@@ -39,7 +39,8 @@
                     </path>
                 </svg>
 
-                <RouterLink :to="{name: 'postview', params: {id: post.id}}" class="text-gray-500 text-xs">0 comments</RouterLink>
+                <RouterLink :to="{ name: 'postview', params: { id: post.id } }" class="text-gray-500 text-xs">
+                    {{ post.comments_count }} comments</RouterLink>
             </div>
         </div>
 

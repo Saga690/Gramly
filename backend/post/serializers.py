@@ -11,7 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'body','likes_count', 'created_by', 'created_at_formatted',)
+        fields = ('id', 'body','likes_count', 'comments_count', 'created_by', 'created_at_formatted',)
 
 
 
@@ -29,4 +29,4 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'body', 'likes_count', 'created_by', 'created_at_formatted', 'comments')
+        fields = ('id', 'body', 'likes_count', 'comments_count', 'created_by', 'created_at_formatted', 'comments')
