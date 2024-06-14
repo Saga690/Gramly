@@ -1,5 +1,7 @@
 import uuid
 
+from django.conf import settings
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.utils import timezone
@@ -54,7 +56,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_avatar(self):
         if self.avatar:
-            return 'http://127.0.0.1:8000' + self.avatar.url
+            return settings.WEBSITE_URL + self.avatar.url
         else:
             return 'https://th.bing.com/th/id/OIP.A9q7aADqLP1yfT-x9uNX1gAAAA?rs=1&pid=ImgDetMain'
 

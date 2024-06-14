@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-la$t0u)0^&4mna3o5a7_d#4f3t_oyvl#-kj8@z95_%3hba#_tz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.gramly.com']
 
-WEBSITE_URL = 'http://127.0.0.1:8000'
+WEBSITE_URL = 'http://api.gramly.com'
 
 
 # Application definition
@@ -53,11 +53,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "http://gramly.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
+    "http://gramly.com",
 ]
 
 INSTALLED_APPS = [
