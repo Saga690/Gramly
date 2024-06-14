@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import PasswordChangeForm   
+from django.core.mail import send_mail
 
 from django.http import JsonResponse
 
@@ -34,9 +35,24 @@ def signup(request):
     })
 
     if form.is_valid():
-        form.save()
+        user = form.save()
+        user.is_active = False
+        user.save()
+
+        url = f'http://127.0.0.1:8000/activateemail/?email={user.email}&id={user.id}'
+
+        send_mail(
+            "Please verify your email",
+            f"The url for activating your account is: {url}",
+            "noreply@gramly.com",
+            [user.email],
+            fail_silently=False,
+        )
+         
     else:
         message = form.errors.as_json()
+
+    print(message)
 
     return JsonResponse({'message': message}, safe=False)
 
