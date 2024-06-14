@@ -7,40 +7,29 @@
                 <p><strong>{{ user.name }}</strong></p>
 
                 <div class="mt-6 flex space-x-8 justify-around">
-                    <RouterLink :to="{name: 'friends', params: {id: user.id}}" class="text-xs text-gray-500">{{ user.friends_count }} friends</RouterLink>
+                    <RouterLink :to="{ name: 'friends', params: { id: user.id } }" class="text-xs text-gray-500">{{
+                        user.friends_count }} friends</RouterLink>
                     <p class="text-xs text-gray-500">{{ user.posts_count }} posts</p>
                 </div>
 
                 <div class="mt-6">
-                    <button 
-                        class="inline-block py-4 px-3 bg-purple-600 text-xs text-white rounded-lg" 
-                        @click="sendFriendshipRequest"
-                        v-if="userStore.user.id !== user.id"
-                    >
+                    <button class="inline-block py-4 px-3 bg-purple-600 text-xs text-white rounded-lg"
+                        @click="sendFriendshipRequest" v-if="userStore.user.id !== user.id">
                         Send friendship request
                     </button>
 
-                    <button 
-                        class="inline-block py-4 px-3 mt-4 bg-purple-600 text-xs text-white rounded-lg" 
-                        @click="sendDirectMessage"
-                        v-if="userStore.user.id !== user.id"
-                    >
+                    <button class="inline-block py-4 px-3 mt-4 bg-purple-600 text-xs text-white rounded-lg"
+                        @click="sendDirectMessage" v-if="userStore.user.id !== user.id">
                         Send direct message
                     </button>
 
-                    <RouterLink 
-                        class="inline-block py-4 px-3 bg-emerald-600 text-xs text-white rounded-lg mr-2" 
-                        to="/profile/edit"
-                        v-if="userStore.user.id === user.id"
-                    >
+                    <RouterLink class="inline-block py-4 px-3 bg-emerald-600 text-xs text-white rounded-lg mr-2"
+                        to="/profile/edit" v-if="userStore.user.id === user.id">
                         Edit Profile
                     </RouterLink>
 
-                    <button 
-                        class="inline-block py-4 px-3 bg-red-600 text-xs text-white rounded-lg" 
-                        @click="logout"
-                        v-if="userStore.user.id === user.id"
-                    >
+                    <button class="inline-block py-4 px-3 bg-red-600 text-xs text-white rounded-lg" @click="logout"
+                        v-if="userStore.user.id === user.id">
                         Log out
                     </button>
 
@@ -50,40 +39,53 @@
         </div>
 
         <div class="main-center col-span-2 space-y-4">
-            <div 
-                class="bg-white border border-gray-200 rounded-lg"
-                v-if="userStore.user.id === user.id"
-            >
+            <div class="bg-white border border-gray-200 rounded-lg" v-if="userStore.user.id === user.id">
                 <form v-on:submit.prevent="submitForm" method="post">
-                    <div class="p-4">  
-                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg" placeholder="What are you thinking about?"></textarea>
+                    <div class="p-4">
+                        <textarea v-model="body" class="p-4 w-full bg-gray-100 rounded-lg"
+                            placeholder="What are you thinking about?"></textarea>
+                        <div id="preview" v-if="url">
+                            <img :src="url" class="w-[100px] mt-3 rounded-xl" />
+                        </div>
                     </div>
 
                     <div class="p-4 border-t border-gray-100 flex justify-between">
-                        <a href="#" class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg">Attach image</a>
+                        <label class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg">
+                            <input type="file" ref="file" @change="onFileChange">
+                            Attach image
+                        </label>
 
                         <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">Post</button>
                     </div>
                 </form>
             </div>
 
-            <div 
-                class="p-4 bg-white border border-gray-200 rounded-lg"
-                v-for="post in posts"
-                v-bind:key="post.id"
-            >
-                <FeedItem v-bind:post="post" />  
+            <div class="p-4 bg-white border border-gray-200 rounded-lg" v-for="post in posts" v-bind:key="post.id">
+                <FeedItem v-bind:post="post" />
             </div>
         </div>
 
         <div class="main-right col-span-1 space-y-4">
-            
+
             <PeopleYouMayKnow />
             <Trends />
 
         </div>
     </div>
 </template>
+
+<style>
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+</style>
 
 <script>
 import axios from 'axios'
@@ -117,9 +119,10 @@ export default {
         return {
             posts: [],
             user: {
-                id:null
+                id: null
             },
             body: '',
+            url: null,
         }
     },
 
@@ -127,9 +130,9 @@ export default {
         this.getFeed()
     },
 
-    watch: { 
+    watch: {
         '$route.params.id': {
-            handler: function() {
+            handler: function () {
                 this.getFeed()
             },
             deep: true,
@@ -138,6 +141,11 @@ export default {
     },
 
     methods: {
+
+        onFileChange(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+        },
 
         sendDirectMessage() {
             console.log('sendDirectMessage')
@@ -187,15 +195,23 @@ export default {
         submitForm() {
             console.log('submitForm', this.body)
 
+            let formData = new FormData()
+            formData.append('image', this.$refs.file.files[0])
+            formData.append('body', this.body)
+
             axios
-                .post('/api/posts/create/', {
-                    'body': this.body
+                .post('/api/posts/create/', formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
                 })
                 .then(response => {
                     console.log('data', response.data)
 
                     this.posts.unshift(response.data)
                     this.body = ''
+                    this.$refs.file.value = null
+                    this.url = null
                     this.user.posts_count += 1
                 })
                 .catch(error => {
