@@ -53,7 +53,7 @@ def post_list_profile(request, id):
 
     posts = Post.objects.filter(created_by_id = id)
 
-    if not request.user in user.friends.all():
+    if not request.user in user.friends.all() and request.user.id != id:
         posts = posts.filter(is_private=False)
 
     posts_serializer = PostSerializer(posts, many= True)
