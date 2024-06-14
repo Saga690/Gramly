@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         if self.avatar:
             return 'http://127.0.0.1:8000' + self.avatar.url
         else:
-            return ''
+            return 'https://th.bing.com/th/id/OIP.A9q7aADqLP1yfT-x9uNX1gAAAA?rs=1&pid=ImgDetMain'
 
 
 class FriendshipRequest(models.Model):
