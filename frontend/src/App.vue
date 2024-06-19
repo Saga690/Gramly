@@ -2,8 +2,10 @@
   <nav class="py-10 px-8 border-b border-gray-200">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between">
-        <div class="menu-left">
-          <a href="/feed" class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 mb-4 font-bold">GRAMLY</a>
+        <div class="menu-left flex space-x-4 items-center">
+          <img src="/gramly.png" alt="" width="24px">
+          <a href="/feed"
+            class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 font-bold">GRAMLY</a>
         </div>
 
         <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
@@ -44,7 +46,7 @@
 
         <div class="menu-right">
           <template v-if="userStore.user.isAuthenticated && userStore.user.id">
-            <RouterLink :to="{name: 'profile', params:{'id': userStore.user.id}}">
+            <RouterLink :to="{ name: 'profile', params: { 'id': userStore.user.id } }">
               <img :src="userStore.user.avatar" class="rounded-full w-12">
             </RouterLink>
           </template>
@@ -64,36 +66,36 @@
 </template>
 
 <script>
-  import Toast from '@/components/Toast.vue'
+import Toast from '@/components/Toast.vue'
 
-  import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 
-  import axios from 'axios'
+import axios from 'axios'
 import { RouterLink } from 'vue-router';
 
-  export default {
+export default {
 
-    setup() {
-      const userStore = useUserStore()
+  setup() {
+    const userStore = useUserStore()
 
-        return {
-          userStore
-        }
-      },
-
-    components: {
-      Toast
-    },
-
-    beforeCreate() {
-      this.userStore.initStore()
-        const token = this.userStore.user.access
-          if (token) {
-            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-          } else {
-            axios.defaults.headers.common["Authorization"] = "";
-          }
+    return {
+      userStore
     }
+  },
 
+  components: {
+    Toast
+  },
+
+  beforeCreate() {
+    this.userStore.initStore()
+    const token = this.userStore.user.access
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    } else {
+      axios.defaults.headers.common["Authorization"] = "";
+    }
   }
+
+}
 </script>
