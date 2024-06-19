@@ -5,12 +5,14 @@
                 <h1 class="mb-6 text-2xl">Login</h1>
 
                 <p class="mb-6 text-gray-500">
-                    Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
-                    Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate. Lorem ipsum dolor sit mate.
+                    Welcome to Gramly, your ultimate social media hub! Log in to connect with friends, share your
+                    favorite moments, and explore a world of new content. Discover trending topics, join vibrant
+                    communities, and stay updated with the latest news. Your personalized feed awaits!
                 </p>
 
                 <p class="font-bold">
-                    New to Gramly? <RouterLink :to="{'name': 'signup'}" class="underline">Click here</RouterLink> to sign up!
+                    New to Gramly? <RouterLink :to="{ 'name': 'signup' }" class="underline">Click here</RouterLink> to
+                    sign up!
                 </p>
             </div>
         </div>
@@ -21,12 +23,14 @@
 
                     <div>
                         <label>E-mail</label><br>
-                        <input type="email" v-model="form.email" placeholder="Your e-mail address" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                        <input type="email" v-model="form.email" placeholder="Your e-mail address"
+                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <div>
                         <label>Password</label><br>
-                        <input type="password" v-model="form.password" placeholder="Your password" class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
+                        <input type="password" v-model="form.password" placeholder="Your password"
+                            class="w-full mt-2 py-4 px-6 border border-gray-200 rounded-lg">
                     </div>
 
                     <template v-if="errors.length > 0">
@@ -38,7 +42,7 @@
                     <div>
                         <button class="py-4 px-6 bg-purple-600 text-white rounded-lg">Log in</button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
@@ -81,13 +85,13 @@ export default {
             if (this.form.password === '') {
                 this.errors.push('Your password is missing')
             }
-            
+
             if (this.errors.length === 0) {
                 await axios
                     .post('/api/login/', this.form)
                     .then(response => {
                         this.userStore.setToken(response.data)
-                        
+
                         axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access;
                     })
                     .catch(error => {
@@ -95,7 +99,7 @@ export default {
 
                         this.errors.push('The email or password is incorrect Or the user is not activated!')
                     })
-                }
+            }
 
             if (this.errors.length === 0) {
                 await axios
