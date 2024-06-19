@@ -5,10 +5,10 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between" v-for="conversation in conversations"
                         v-bind:key="conversation.id" v-on:click="setActiveConversation(conversation.id)">
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2 cursor-pointer">
 
                             <template v-for="user in conversation.users" v-bind:key="user.id">
-                                <img :src="user.get_avatar" class="w-[40px] rounded-full">
+                                <img :src="user.get_avatar" class="w-[40px] rounded-full" v-if="user.id !== userStore.user.id">
                                 <p class="text-xs font-bold" v-if="user.id !== userStore.user.id">{{ user.name }}</p>
                             </template>
                         </div>

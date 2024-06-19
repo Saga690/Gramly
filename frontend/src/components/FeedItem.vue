@@ -25,7 +25,7 @@
 
     <div class="my-6 flex justify-between">
         <div class="flex space-x-6 items-center">
-            <div class="flex items-center space-x-2" @click="likePost(post.id)">
+            <div class="flex items-center space-x-2 cursor-pointer" @click="likePost(post.id)">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -36,7 +36,7 @@
                 <span class="text-gray-500 text-xs">{{ post.likes_count }} likes</span>
             </div>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -59,7 +59,7 @@
         </div>
 
         <div>
-            <div @click="toggleExtraModal">
+            <div @click="toggleExtraModal" class="cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -72,7 +72,7 @@
 
     <div v-if="showExtraModal">
         <div class="flex space-x-6 items-center">
-            <div class="flex items-center space-x-2" @click="deletePost" v-if="userStore.user.id == post.created_by.id">
+            <div class="flex items-center space-x-2 cursor-pointer" @click="deletePost" v-if="userStore.user.id == post.created_by.id">
                 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-red-500">
@@ -83,7 +83,7 @@
                 <span class="text-red-500 text-xs">Delete post</span>
             </div>
 
-            <div class="flex items-center space-x-2" @click="reportPost">
+            <div class="flex items-center space-x-2 cursor-pointer" @click="reportPost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6 text-orange-500">
                     <path stroke-linecap="round" stroke-linejoin="round"
