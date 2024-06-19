@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between">
         <div class="menu-left">
-          <a href="#" class="text-xl">Gramly</a>
+          <a href="#" class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 mb-4 font-bold">GRAMLY</a>
         </div>
 
         <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">

@@ -45,6 +45,7 @@
             </div>
 
             <div class="p-4 bg-white border border-gray-200 rounded-lg grid grid-cols-2 gap-4" v-if="friends.length">
+                <div class="text-center my-4 text-gray-700 font-semibold col-span-2">FRIENDS</div>
                 <div class="p-4 text-center bg-gray-100 rounded-lg" v-for="user in friends" v-bind:key="user.id">
                     <img :src="user.get_avatar" class="mb-6 rounded-full">
 
