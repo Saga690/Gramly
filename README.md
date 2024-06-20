@@ -12,6 +12,7 @@ Gramly is a dynamic social media app which allows users to create, like, report,
 - Delve on trending topics
 - Search functionality to find users and posts
 - Add friends
+- Real time chats with different users
 - Create, delete, and like posts
 - Option to create private posts visible only to friends
 - Ability to add frineds
