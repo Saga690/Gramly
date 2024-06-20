@@ -14,7 +14,7 @@
 
         <div class="p-4 border-t border-gray-100 flex justify-between">
             <label class="inline-block py-4 px-6 bg-gray-600 text-white rounded-lg cursor-pointer">
-                <input type="file" ref="file" @change="onFileChange">
+                <input type="file" ref="file" @change="onFileChange" class="dnone">
                 Attach image
             </label>
 
@@ -22,6 +22,12 @@
         </div>
     </form>
 </template>
+
+<style>
+.dnone {
+    display: none;
+}
+</style>
 
 <script>
 import axios from 'axios'

@@ -59,10 +59,6 @@
 </template>
 
 <style>
-input[type="file"] {
-    display: none;
-}
-
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
