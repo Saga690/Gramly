@@ -1,11 +1,11 @@
 <template>
-  <nav class="py-10 px-8 border-b border-gray-200">
+  <nav class="p-8 border-b border-gray-200">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center justify-between">
         <div class="menu-left flex space-x-4 items-center">
           <img src="/gramly.png" alt="" width="24px">
           <a href="/feed"
-            class="god text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 font-bold">GRAMLY</a>
+            class="god text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 font-bold p-2">GRAMLY</a>
         </div>
 
         <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
