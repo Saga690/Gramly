@@ -154,6 +154,8 @@ export default {
                 .then(response => {
                     console.log(response.data)
 
+                    this.body = ''
+
                     this.activeConversation.messages.push(response.data)
                 })
                 .catch(error => {
