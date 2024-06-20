@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gramly is a dynamic social media app which allows users to create, like, report, and delete posts, as well as view posts from other users.
+Gramly is a dynamic social media platform creating a vibrant online community where users can connect, share content, and engage with others. It aims to provide a seamless user experience, promote meaningful interactions, and cater to specific niches or interests.
 
 ## Features
 
