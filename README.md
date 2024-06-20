@@ -15,7 +15,7 @@ Gramly is a dynamic social media platform creating a vibrant online community wh
 - Real time chats with different users
 - Create, delete, and like posts
 - Option to create private posts visible only to friends
-- Ability to add frineds
+- Ability to add friends
 - Report inappropriate content
 - Real-time updates for likes and post count
 - Receive notifications for likes, comments, friend requests, and reports
