@@ -5,7 +5,7 @@
         <div class="menu-left flex space-x-4 items-center">
           <img src="/gramly.png" alt="" width="24px">
           <a href="/feed"
-            class="text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 font-bold">GRAMLY</a>
+            class="god text-xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 font-bold">GRAMLY</a>
         </div>
 
         <div class="menu-center flex space-x-12" v-if="userStore.user.isAuthenticated">
