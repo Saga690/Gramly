@@ -152,6 +152,10 @@ export default {
                 .then(response => {
                     console.log(response.data)
 
+                    if (this.user) {
+                        this.user.posts_count -= 1
+                    }
+
                     this.toastStore.showToast(5000, 'The post was deleted', 'bg-emerald-500')
                 })
                 .catch(error => {
