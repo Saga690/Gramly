@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
         <div class="main-left col-span-1">
             <div class="p-4 bg-white border border-gray-200 text-center rounded-lg">
-                <img :src="user.get_avatar" class="mb-6 rounded-full">
+                <img :src="user.get_avatar" class="mb-6 rounded-full w-64 h-64">
 
                 <p><strong>{{ user.name }}</strong></p>
 
